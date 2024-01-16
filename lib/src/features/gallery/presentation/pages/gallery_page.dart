@@ -46,7 +46,7 @@ class _GalleryPageState extends State<GalleryPage> {
         ),
         child: BlocBuilder<GalleryCubit, GalleryState>(
           builder: (context, state) {
-            if (state.viewState.isProcessing && state.images.isNotEmpty) {
+            if (state.viewState.isProcessing && state.images.isEmpty) {
               return const Center(
                 child: CircularProgressIndicator(),
               );

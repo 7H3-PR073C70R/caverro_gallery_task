@@ -11,7 +11,7 @@ A Canverro Gallery Task Project created by Very Good CLI.
 ---
 
 ## Project Setup
- Create an .env file in the root directory for each environment by referring to the provided example [here](env.example). Ensure that you generate the necessary environment variables as specified in the example to enable the usage of all available configurations as listed below.
+ Create an .env file in the root directory for each environment by referring to the provided example [here](.env.example). Ensure that you generate the necessary environment variables as specified in the example to enable the usage of all available configurations as listed below.
  
  - .env.dev
  - .env.production

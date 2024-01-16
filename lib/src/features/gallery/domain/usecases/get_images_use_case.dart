@@ -9,6 +9,6 @@ class GetImagesUseCase implements UseCase<List<ImageModel>, int> {
   final GalleryRepository _repository;
   @override
   Future<Either<Failure, List<ImageModel>>> call(int params) {
-   return _repository.getImages(page: params);
+    return _repository.getImages(page: params);
   }
 }

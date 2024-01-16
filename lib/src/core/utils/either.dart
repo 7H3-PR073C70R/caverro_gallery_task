@@ -18,7 +18,7 @@ abstract class Either<L, R> extends Equatable {
 class Left<L, R> extends Either<L, R> {
   const Left(this.value);
   final L value;
-  
+
   @override
   List<Object?> get props => [value];
 }
@@ -27,6 +27,6 @@ class Right<L, R> extends Either<L, R> {
   const Right(this.value);
   final R value;
 
-   @override
+  @override
   List<Object?> get props => [value];
 }

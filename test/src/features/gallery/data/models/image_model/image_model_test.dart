@@ -69,7 +69,8 @@ void main() {
 
       expect(updatedImage.width, 1200);
       expect(updatedImage.height, 900);
-      expect(updatedImage.downloadUrl, 'https://example.com/download_updated.jpg');
+      expect(
+          updatedImage.downloadUrl, 'https://example.com/download_updated.jpg');
       expect(updatedImage, isNot(equals(originalImage)));
     });
   });

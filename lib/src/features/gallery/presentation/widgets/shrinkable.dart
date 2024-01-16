@@ -3,9 +3,11 @@ import 'package:flutter/material.dart';
 class Shrinkable extends StatefulWidget {
   const Shrinkable({
     required this.child,
+    required this.onTap,
     super.key,
   });
   final Widget child;
+  final VoidCallback? onTap;
 
   @override
   State<Shrinkable> createState() => _ShrinkableState();
@@ -37,14 +39,17 @@ class _ShrinkableState extends State<Shrinkable>
     return GestureDetector(
       behavior: HitTestBehavior.opaque,
       onTapUp: (_) {
+        if (widget.onTap == null) return;
         _controller.forward();
       },
       onTapCancel: () {
+        if (widget.onTap == null) return;
         _controller.forward();
       },
       onTap: () {
         Future.delayed(const Duration(milliseconds: 200), () {
           _controller.reverse().then((value) {
+            widget.onTap?.call();
             _controller.forward();
           });
         });

@@ -2,6 +2,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:canverro_gallery_task/src/core/extensions/responsiveness_extension.dart';
 import 'package:canverro_gallery_task/src/features/gallery/presentation/cubit/gallery_cubit.dart';
 import 'package:canverro_gallery_task/src/features/gallery/presentation/widgets/image_dialog.dart';
+import 'package:canverro_gallery_task/src/features/gallery/presentation/widgets/shrinkable.dart';
 import 'package:canverro_gallery_task/src/l10n/l10n.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -67,7 +68,7 @@ class _GalleryPageState extends State<GalleryPage> {
                 ),
                 itemCount: state.images.length,
                 itemBuilder: (context, index) {
-                  return GestureDetector(
+                  return Shrinkable(
                     onTap: () {
                       showDialog<dynamic>(
                         context: context,

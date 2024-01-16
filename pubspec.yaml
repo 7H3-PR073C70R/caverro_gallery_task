@@ -39,7 +39,7 @@ dev_dependencies:
 flutter:
   uses-material-design: true
   generate: true
-  # assets:
-  #   - .env.dev
-  #   - .env.production
-  #   - .env.staging
+  assets:
+    - .env.dev
+    - .env.production
+    - .env.staging

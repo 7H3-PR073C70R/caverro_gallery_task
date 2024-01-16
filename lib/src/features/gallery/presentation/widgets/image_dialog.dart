@@ -18,8 +18,6 @@ class _ImageDialogState extends State<ImageDialog>
     with SingleTickerProviderStateMixin {
   bool isZoomed = false;
   Tween<double> tween = Tween<double>(begin: 0.5, end: 1);
-  double offsetX = 0;
-  double offsetY = 0;
 
   @override
   Widget build(BuildContext context) {
@@ -33,99 +31,80 @@ class _ImageDialogState extends State<ImageDialog>
               tween: tween,
               duration: const Duration(milliseconds: 200),
               builder: (BuildContext context, double? value, Widget? child) =>
-                  Transform.scale(
-                scale: value ?? 1,
-                child: GestureDetector(
-                  onDoubleTap: () {
-                    if (isZoomed) {
-                      offsetX = 0.0;
-                      offsetY = 0.0;
-                      tween = Tween<double>(begin: 2, end: 1);
-                    } else {
-                      tween = Tween<double>(begin: 1, end: 3);
-                    }
-                    isZoomed = !isZoomed;
-                    setState(() {});
-                  },
-                  onHorizontalDragUpdate: (details) {
-                    if (isZoomed) {
-                      setState(() {
-                        offsetX += details.primaryDelta ?? 0.0;
-                      });
-                    }
-                  },
-                  onVerticalDragUpdate: (details) {
-                    if (isZoomed) {
-                      setState(() {
-                        offsetY += details.primaryDelta ?? 0.0;
-                      });
-                    }
-                  },
-                  child: Transform.translate(
-                    offset: Offset(offsetX, offsetY),
-                    child: CachedNetworkImage(
-                      imageUrl: widget.image.downloadUrl ?? '',
-                      fit: BoxFit.cover,
-                      progressIndicatorBuilder: (context, url, progress) {
-                        return Center(
-                          child: CircularProgressIndicator(
-                            value: (progress.downloaded) /
-                                (progress.totalSize ?? 1),
-                          ),
-                        );
-                      },
-                      errorWidget: (context, url, error) =>
-                          const Icon(Icons.error),
-                    ),
+                  GestureDetector(
+                onDoubleTap: () {
+                  isZoomed = !isZoomed;
+                  setState(() {});
+                },
+                child: InteractiveViewer(
+                  minScale: 1,
+                  maxScale: 15,
+                  child: CachedNetworkImage(
+                    imageUrl: widget.image.downloadUrl ?? '',
+                    fit: BoxFit.cover,
+                    progressIndicatorBuilder: (context, url, progress) {
+                      return Center(
+                        child: CircularProgressIndicator(
+                          value:
+                              (progress.downloaded) / (progress.totalSize ?? 1),
+                        ),
+                      );
+                    },
+                    errorWidget: (context, url, error) =>
+                        const Icon(Icons.error),
                   ),
                 ),
               ),
             ),
           ),
-          AppSpacing.verticalSpaceSmall,
-          AnimatedCrossFade(
-            firstChild: Padding(
-              padding: EdgeInsets.symmetric(
-                horizontal: 12.radius,
-                vertical: 24.radius,
+          if(!isZoomed)
+          ...[
+            AppSpacing.verticalSpaceSmall,
+            AnimatedCrossFade(
+              firstChild: Padding(
+                padding: EdgeInsets.symmetric(
+                  horizontal: 12.radius,
+                  vertical: 24.radius,
+                ),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    ImageDetails(
+                      title: 'Id',
+                      description: widget.image.id ?? '',
+                    ),
+                    ImageDetails(
+                      title: 'Author',
+                      description: widget.image.author ?? '',
+                    ),
+                    ImageDetails(
+                      title: 'Width',
+                      description: widget.image.width?.toString() ?? '',
+                    ),
+                    ImageDetails(
+                      title: 'Height',
+                      description: widget.image.height?.toString() ?? '',
+                    ),
+                    ImageDetails(
+                      title: 'Url',
+                      description: widget.image.url ?? '',
+                    ),
+                    ImageDetails(
+                      title: 'Download Url',
+                      description: widget.image.downloadUrl ?? '',
+                    ),
+                  ],
+                ),
               ),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  ImageDetails(
-                    title: 'Id',
-                    description: widget.image.id ?? '',
-                  ),
-                  ImageDetails(
-                    title: 'Author',
-                    description: widget.image.author ?? '',
-                  ),
-                  ImageDetails(
-                    title: 'Width',
-                    description: widget.image.width?.toString() ?? '',
-                  ),
-                  ImageDetails(
-                    title: 'Height',
-                    description: widget.image.height?.toString() ?? '',
-                  ),
-                  ImageDetails(
-                    title: 'Url',
-                    description: widget.image.url ?? '',
-                  ),
-                  ImageDetails(
-                    title: 'Download Url',
-                    description: widget.image.downloadUrl ?? '',
-                  ),
-                ],
-              ),
+              secondChild: const SizedBox.shrink(),
+              crossFadeState: isZoomed
+                  ? CrossFadeState.showSecond
+                  : CrossFadeState.showFirst,
+              duration: const Duration(milliseconds: 200),
+              sizeCurve: Curves.easeInCubic,
             ),
-            secondChild: const SizedBox.shrink(),
-            crossFadeState:
-                isZoomed ? CrossFadeState.showSecond : CrossFadeState.showFirst,
-            duration: const Duration(milliseconds: 200),
-            sizeCurve: Curves.easeInCubic,
-          ),
+          ],
         ],
       ),
     );

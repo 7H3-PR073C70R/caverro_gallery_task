@@ -16,6 +16,7 @@
   ],
   "useGitignore": true,
   "words": [
+    "localizable",
     "Canverro",
     "CANVERRO",
     "कैनवेरो",
@@ -24,6 +25,7 @@
     "गैलरी",
     "ऐपबार",
     "दिखाया",
-    "टेक्स्ट"
+    "टेक्स्ट",
+    "pubspec",
   ]
 }

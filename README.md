@@ -23,7 +23,14 @@ A Canverro Gallery Task Project created by Very Good CLI.
  | ----------- | ----------- |
  | API_URL | The base url of the API |
  
+ Add the following to your pubspec.yaml file
 
+ ```
+ assets:
+    - .env.dev
+    - .env.production
+    - .env.staging
+```
 
 ### Install dependencies
 ```sh

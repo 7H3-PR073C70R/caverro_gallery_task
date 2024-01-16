@@ -3,6 +3,7 @@ import 'package:canverro_gallery_task/src/core/constants/app_spacing.dart';
 import 'package:canverro_gallery_task/src/core/extensions/responsiveness_extension.dart';
 import 'package:canverro_gallery_task/src/features/gallery/data/models/image_model/image_model.dart';
 import 'package:canverro_gallery_task/src/features/gallery/presentation/widgets/image_details.dart';
+import 'package:canverro_gallery_task/src/features/gallery/presentation/widgets/shrinkable.dart';
 import 'package:flutter/material.dart';
 
 class ImageDialog extends StatefulWidget {
@@ -63,19 +64,21 @@ class _ImageDialogState extends State<ImageDialog>
                   },
                   child: Transform.translate(
                     offset: Offset(offsetX, offsetY),
-                    child: CachedNetworkImage(
-                      imageUrl: widget.image.downloadUrl ?? '',
-                      fit: BoxFit.cover,
-                      progressIndicatorBuilder: (context, url, progress) {
-                        return Center(
-                          child: CircularProgressIndicator(
-                            value: (progress.downloaded) /
-                                (progress.totalSize ?? 1),
-                          ),
-                        );
-                      },
-                      errorWidget: (context, url, error) =>
-                          const Icon(Icons.error),
+                    child: Shrinkable(
+                      child: CachedNetworkImage(
+                        imageUrl: widget.image.downloadUrl ?? '',
+                        fit: BoxFit.cover,
+                        progressIndicatorBuilder: (context, url, progress) {
+                          return Center(
+                            child: CircularProgressIndicator(
+                              value: (progress.downloaded) /
+                                  (progress.totalSize ?? 1),
+                            ),
+                          );
+                        },
+                        errorWidget: (context, url, error) =>
+                            const Icon(Icons.error),
+                      ),
                     ),
                   ),
                 ),

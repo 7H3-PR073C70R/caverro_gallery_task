@@ -1,5 +1,3 @@
 part of 'locator.dart';
 
-Future<void> _initRepositoryLocator() async {
-  
-}
+Future<void> _initRepositoryLocator() async {}

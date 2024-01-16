@@ -1,5 +1,3 @@
 part of 'locator.dart';
 
-void _initDataSource() {
-  
-}
+void _initDataSource() {}

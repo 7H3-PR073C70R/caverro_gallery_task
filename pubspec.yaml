@@ -8,6 +8,7 @@ environment:
 
 dependencies:
   bloc: ^8.1.2
+  cached_network_image: ^3.3.1
   dio: ^5.4.0
   equatable: ^2.0.5
   flutter:
@@ -22,6 +23,7 @@ dependencies:
   intl: ^0.18.0
   json_annotation: ^4.8.1
   logger: ^2.0.2+1
+  retrofit: ^4.0.3
 
 dev_dependencies:
   bloc_test: ^9.1.4
@@ -37,4 +39,7 @@ dev_dependencies:
 flutter:
   uses-material-design: true
   generate: true
-  
+  assets:
+    - .env.dev
+    - .env.production
+    - .env.staging

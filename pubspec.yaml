@@ -23,7 +23,7 @@ dependencies:
   intl: ^0.18.0
   json_annotation: ^4.8.1
   logger: ^2.0.2+1
-  retrofit: ^4.0.3
+  retrofit: ^4.1.0
 
 dev_dependencies:
   bloc_test: ^9.1.4
